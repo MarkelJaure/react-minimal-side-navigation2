@@ -15,6 +15,7 @@ declare global {
 }
 
 export type NavItemProps = {
+	className: string;
   title: string;
   itemId: string;
   // disabled?: boolean;
@@ -84,7 +85,7 @@ const Navigation: React.FC<SideNavProps> = ({
         <nav
           role="navigation"
           aria-label="side-navigation"
-          className="side-navigation-panel"
+          className={`${item.className}-side-navigation-panel`}
         >
           {items.map((item: NavItemProps) => {
             const ElemBefore = item.elemBefore;
@@ -104,24 +105,24 @@ const Navigation: React.FC<SideNavProps> = ({
                 false);
 
             return (
-              <ul key={item.itemId} className="side-navigation-panel-select">
+              <ul key={item.itemId} className={`${item.className}-side-navigation-panel-select`}>
                 <li className="side-navigation-panel-select-wrap">
                   <div
                     onClick={(): void => {
                       handleSubNavExpand(item);
                       handleClick(item.itemId);
                     }}
-                    className={`side-navigation-panel-select-option ${
+                    className={`${item.className}-side-navigation-panel-select-option ${
                       isItemSelected
-                        ? 'side-navigation-panel-select-option-selected'
+                        ? `${item.className}-side-navigation-panel-select-option-selected`
                         : ''
                     }`}
                   >
-                    <span className="side-navigation-panel-select-option-wrap">
+                    <span className={`${item.className}-side-navigation-panel-select-option-wrap`}>
                       {/** Prefix Icon Component */}
                       {ElemBefore && <ElemBefore />}
 
-                      <span className="side-navigation-panel-select-option-text">
+                      <span className={`${item.className}-side-navigation-panel-select-option-text`}>
                         {item.title}
                       </span>
                     </span>
@@ -133,14 +134,14 @@ const Navigation: React.FC<SideNavProps> = ({
                 </li>
 
                 {item.subNav && item.subNav.length > 0 && isActiveTab && (
-                  <ul className="side-navigation-panel-select-inner">
+                  <ul className={`${item.className}-side-navigation-panel-select-inner`}>
                     {item.subNav.map((subNavItem: NavItemProps) => {
                       const SubItemElemBefore = subNavItem.elemBefore;
 
                       return (
                         <li
                           key={subNavItem.itemId}
-                          className="side-navigation-panel-select-inner-wrap"
+                          className={`${item.className}-side-navigation-panel-select-inner-wrap`}
                         >
                           <div
                             onClick={(): void => {
@@ -150,17 +151,17 @@ const Navigation: React.FC<SideNavProps> = ({
                               });
                               handleClick(subNavItem.itemId);
                             }}
-                            className={`side-navigation-panel-select-inner-option ${
+                            className={`${item.className}-side-navigation-panel-select-inner-option ${
                               activeSubNav.selectedId === subNavItem.itemId
-                                ? 'side-navigation-panel-select-inner-option-selected'
+                                ? `${item.className}-side-navigation-panel-select-inner-option-selected`
                                 : ''
                             } `}
                           >
-                            <span className="side-navigation-panel-select-inner-option-wrap">
+                            <span className={`${item.className}-side-navigation-panel-select-inner-option-wrap`}>
                               {/** Prefix Icon Component */}
                               {SubItemElemBefore && <SubItemElemBefore />}
 
-                              <span className="side-navigation-panel-select-inner-option-text">
+                              <span className={`${item.className}-side-navigation-panel-select-inner-option-text`}>
                                 {subNavItem.title}
                               </span>
                             </span>
